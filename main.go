@@ -8,9 +8,18 @@ import (
 
 func main() {
 
-	deck := models.NewDeck()
-	player := models.NewHand(deck)
+	outcomes := make([]int, 7)
 
-	fmt.Println(player)
+	deck := models.NewDeck()
+
+	for range 100 {
+		player := models.NewHand(deck)
+		outcome := player.Detect()
+		outcomes[outcome]++
+		deck.Reset()
+
+	}
+
+	fmt.Println(outcomes)
 
 }

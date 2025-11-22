@@ -7,7 +7,7 @@ const BLACK = "\x1b[30m"
 const RESET = "\x1b[0m"
 
 type Card struct {
-	Value uint8
+	value uint8
 	rank  string
 	suit  string
 }

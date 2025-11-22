@@ -9,11 +9,11 @@ func NewDeck() *Deck {
 	deck := make(Deck, 0)
 
 	ranks := []string{"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}
-	values := []uint8{2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11}
+	values := []uint8{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
 
 	for i, rank := range ranks {
 		for _, suit := range []string{"C", "H", "S", "D"} {
-			card := Card{Value: values[i], rank: rank, suit: suit}
+			card := Card{value: values[i], rank: rank, suit: suit}
 			deck = append(deck, card)
 		}
 
