@@ -1,2 +1,1 @@
-# go-3cp
-Three Card Poker CLI
+# Three Card Poker CLI
