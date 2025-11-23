@@ -1,6 +1,8 @@
 package models
 
-import "math/rand/v2"
+import (
+	"math/rand/v2"
+)
 
 type Deck []Card
 
@@ -24,9 +26,8 @@ func NewDeck() *Deck {
 }
 
 func (d *Deck) Draw() *Card {
-	n := len(*d)
 
-	idx := rand.IntN(n)
+	idx := rand.IntN(len(*d))
 
 	card := (*d)[idx]
 
@@ -36,7 +37,5 @@ func (d *Deck) Draw() *Card {
 }
 
 func (d *Deck) Reset() {
-	if len(*d) < 52 {
-		d = NewDeck()
-	}
+	d = NewDeck()
 }
