@@ -35,7 +35,3 @@ func (d *Deck) Draw() *Card {
 
 	return &card
 }
-
-func (d *Deck) Reset() {
-	d = NewDeck()
-}
