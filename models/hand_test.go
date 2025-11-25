@@ -13,12 +13,12 @@ func TestSort(t *testing.T) {
 	}{
 		{
 			name: "simple hand",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "D"},
 				{value: 2, rank: "2", suit: "H"},
 				{value: 7, rank: "7", suit: "C"},
 			}},
-			expected: Hand{cards: []Card{
+			expected: Hand{Cards: []Card{
 				{value: 2, rank: "2", suit: "H"},
 				{value: 7, rank: "7", suit: "C"},
 				{value: 14, rank: "A", suit: "D"},
@@ -26,12 +26,12 @@ func TestSort(t *testing.T) {
 		},
 		{
 			name: "with pair",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 2, rank: "2", suit: "H"},
 				{value: 7, rank: "7", suit: "C"},
 				{value: 2, rank: "2", suit: "D"},
 			}},
-			expected: Hand{cards: []Card{
+			expected: Hand{Cards: []Card{
 				{value: 2, rank: "2", suit: "D"},
 				{value: 2, rank: "2", suit: "H"},
 				{value: 7, rank: "7", suit: "C"},
@@ -59,7 +59,7 @@ func TestIsConsecutive(t *testing.T) {
 	}{
 		{
 			name: "consecutive with low ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "D"},
 				{value: 2, rank: "2", suit: "H"},
 				{value: 3, rank: "3", suit: "C"},
@@ -68,7 +68,7 @@ func TestIsConsecutive(t *testing.T) {
 		},
 		{
 			name: "consecutive with high ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "D"},
 				{value: 13, rank: "K", suit: "H"},
 				{value: 12, rank: "Q", suit: "C"},
@@ -77,7 +77,7 @@ func TestIsConsecutive(t *testing.T) {
 		},
 		{
 			name: "simple non-consecutive",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 8, rank: "8", suit: "D"},
 				{value: 2, rank: "2", suit: "H"},
 				{value: 6, rank: "6", suit: "C"},
@@ -86,7 +86,7 @@ func TestIsConsecutive(t *testing.T) {
 		},
 		{
 			name: "simple consecutive",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 8, rank: "8", suit: "D"},
 				{value: 7, rank: "7", suit: "H"},
 				{value: 6, rank: "6", suit: "C"},
@@ -115,7 +115,7 @@ func TestIsOnePair(t *testing.T) {
 	}{
 		{
 			name: "positive test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 10, rank: "10", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -124,7 +124,7 @@ func TestIsOnePair(t *testing.T) {
 		},
 		{
 			name: "negative test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 6, rank: "6", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -133,7 +133,7 @@ func TestIsOnePair(t *testing.T) {
 		},
 		{
 			name: "three of a kind",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 10, rank: "10", suit: "D"},
 				{value: 10, rank: "10", suit: "H"}},
@@ -161,7 +161,7 @@ func TestIsFlush(t *testing.T) {
 	}{
 		{
 			name: "positive test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 7, rank: "7", suit: "C"},
 				{value: 2, rank: "2", suit: "C"}},
@@ -170,7 +170,7 @@ func TestIsFlush(t *testing.T) {
 		},
 		{
 			name: "negative test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 6, rank: "6", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -198,7 +198,7 @@ func TestIsStraight(t *testing.T) {
 	}{
 		{
 			name: "positive test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 9, rank: "9", suit: "H"},
 				{value: 8, rank: "8", suit: "D"}},
@@ -207,7 +207,7 @@ func TestIsStraight(t *testing.T) {
 		},
 		{
 			name: "negative test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 6, rank: "6", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -216,7 +216,7 @@ func TestIsStraight(t *testing.T) {
 		},
 		{
 			name: "postive test with high ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "C"},
 				{value: 13, rank: "K", suit: "D"},
 				{value: 12, rank: "Q", suit: "H"}},
@@ -225,7 +225,7 @@ func TestIsStraight(t *testing.T) {
 		},
 		{
 			name: "postive test with low ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "C"},
 				{value: 2, rank: "2", suit: "D"},
 				{value: 3, rank: "3", suit: "H"}},
@@ -253,7 +253,7 @@ func TestIsThreeOfAKind(t *testing.T) {
 	}{
 		{
 			name: "positive test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 10, rank: "10", suit: "H"},
 				{value: 10, rank: "10", suit: "D"}},
@@ -262,7 +262,7 @@ func TestIsThreeOfAKind(t *testing.T) {
 		},
 		{
 			name: "negative test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 6, rank: "6", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -290,7 +290,7 @@ func TestIsStraightFlush(t *testing.T) {
 	}{
 		{
 			name: "positive test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "S"},
 				{value: 9, rank: "9", suit: "S"},
 				{value: 8, rank: "8", suit: "S"}},
@@ -299,7 +299,7 @@ func TestIsStraightFlush(t *testing.T) {
 		},
 		{
 			name: "negative test",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 10, rank: "10", suit: "C"},
 				{value: 6, rank: "6", suit: "D"},
 				{value: 2, rank: "2", suit: "H"}},
@@ -308,7 +308,7 @@ func TestIsStraightFlush(t *testing.T) {
 		},
 		{
 			name: "postive test with high ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "S"},
 				{value: 13, rank: "K", suit: "S"},
 				{value: 12, rank: "Q", suit: "S"}},
@@ -317,7 +317,7 @@ func TestIsStraightFlush(t *testing.T) {
 		},
 		{
 			name: "postive test with low ace",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 14, rank: "A", suit: "S"},
 				{value: 2, rank: "2", suit: "S"},
 				{value: 3, rank: "3", suit: "S"}},
@@ -345,7 +345,7 @@ func TestIsRoyalFlush(t *testing.T) {
 	}{
 		{
 			name: "positive test with spades",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 12, rank: "Q", suit: "S"},
 				{value: 13, rank: "K", suit: "S"},
 				{value: 14, rank: "A", suit: "S"}},
@@ -354,7 +354,7 @@ func TestIsRoyalFlush(t *testing.T) {
 		},
 		{
 			name: "positive test with diamonds",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 12, rank: "Q", suit: "D"},
 				{value: 13, rank: "K", suit: "D"},
 				{value: 14, rank: "A", suit: "D"}},
@@ -363,7 +363,7 @@ func TestIsRoyalFlush(t *testing.T) {
 		},
 		{
 			name: "negative test with matching suits",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 2, rank: "2", suit: "S"},
 				{value: 3, rank: "3", suit: "S"},
 				{value: 14, rank: "A", suit: "S"}},
@@ -372,7 +372,7 @@ func TestIsRoyalFlush(t *testing.T) {
 		},
 		{
 			name: "negative test with matching suits",
-			input: Hand{cards: []Card{
+			input: Hand{Cards: []Card{
 				{value: 2, rank: "2", suit: "S"},
 				{value: 3, rank: "3", suit: "H"},
 				{value: 14, rank: "A", suit: "C"}},
@@ -387,6 +387,245 @@ func TestIsRoyalFlush(t *testing.T) {
 			if output != test.expected {
 				t.Errorf("FAIL: expected %t output %t", test.expected, output)
 			}
+		})
+	}
+
+}
+
+func TestCompare(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    *Hand
+		compare  *Hand
+		expected int8
+	}{
+		{
+			name: "clear winner",
+			input: &Hand{Cards: []Card{
+				{value: 10, rank: "10", suit: "S"},
+				{value: 10, rank: "10", suit: "H"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 4, rank: "4", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+			}},
+			expected: 1,
+		},
+
+		{
+			name: "clear loser",
+			input: &Hand{Cards: []Card{
+				{value: 4, rank: "4", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 10, rank: "10", suit: "S"},
+				{value: 10, rank: "10", suit: "H"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			expected: -1,
+		},
+
+		{
+			name: "break tie high card winner",
+			input: &Hand{Cards: []Card{
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+				{value: 14, rank: "A", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie high card loser",
+			input: &Hand{Cards: []Card{
+				{value: 2, rank: "2", suit: "H"},
+				{value: 3, rank: "3", suit: "S"},
+				{value: 5, rank: "5", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+			}},
+			expected: -1,
+		},
+		{
+			name: "break tie high card push",
+			input: &Hand{Cards: []Card{
+				{value: 2, rank: "2", suit: "H"},
+				{value: 3, rank: "3", suit: "S"},
+				{value: 5, rank: "5", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 2, rank: "2", suit: "H"},
+				{value: 3, rank: "3", suit: "S"},
+				{value: 5, rank: "5", suit: "C"},
+			}},
+			expected: 0,
+		},
+
+		{
+			name: "break tie one pair winner",
+			input: &Hand{Cards: []Card{
+				{value: 9, rank: "9", suit: "H"},
+				{value: 14, rank: "A", suit: "S"},
+				{value: 14, rank: "A", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 10, rank: "10", suit: "H"},
+				{value: 10, rank: "10", suit: "S"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie one pair loser",
+			input: &Hand{Cards: []Card{
+				{value: 2, rank: "2", suit: "H"},
+				{value: 12, rank: "Q", suit: "S"},
+				{value: 12, rank: "Q", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 12, rank: "Q", suit: "H"},
+				{value: 12, rank: "Q", suit: "S"},
+			}},
+			expected: -1,
+		},
+
+		{
+			name: "break tie flush winner",
+			input: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 10, rank: "10", suit: "H"},
+				{value: 14, rank: "A", suit: "H"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 8, rank: "8", suit: "C"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie flush winner",
+			input: &Hand{Cards: []Card{
+				{value: 6, rank: "6", suit: "C"},
+				{value: 8, rank: "8", suit: "C"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 10, rank: "10", suit: "H"},
+				{value: 14, rank: "A", suit: "H"},
+			}},
+			expected: -1,
+		},
+
+		{
+			name: "break tie straight winner",
+			input: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 8, rank: "8", suit: "C"},
+				{value: 9, rank: "9", suit: "D"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie straight loser",
+			input: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 8, rank: "8", suit: "C"},
+				{value: 9, rank: "9", suit: "D"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "C"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			expected: -1,
+		},
+
+		{
+			name: "break tie three of a kind winner",
+			input: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "C"},
+				{value: 8, rank: "8", suit: "H"},
+				{value: 8, rank: "8", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 7, rank: "7", suit: "C"},
+				{value: 7, rank: "7", suit: "D"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie three of a kind loser",
+			input: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "H"},
+				{value: 7, rank: "7", suit: "C"},
+				{value: 7, rank: "7", suit: "D"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "C"},
+				{value: 8, rank: "8", suit: "H"},
+				{value: 8, rank: "8", suit: "C"},
+			}},
+			expected: -1,
+		},
+
+		{
+			name: "break tie straight flush winner",
+			input: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "C"},
+				{value: 9, rank: "9", suit: "C"},
+				{value: 10, rank: "10", suit: "C"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "D"},
+				{value: 8, rank: "8", suit: "D"},
+				{value: 9, rank: "9", suit: "D"},
+			}},
+			expected: 1,
+		},
+		{
+			name: "break tie straight flush loser",
+			input: &Hand{Cards: []Card{
+				{value: 7, rank: "7", suit: "S"},
+				{value: 8, rank: "8", suit: "S"},
+				{value: 9, rank: "9", suit: "S"},
+			}},
+			compare: &Hand{Cards: []Card{
+				{value: 8, rank: "8", suit: "H"},
+				{value: 9, rank: "9", suit: "H"},
+				{value: 10, rank: "10", suit: "H"},
+			}},
+			expected: -1,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			output := test.input.Compare(test.compare)
+
+			if output != test.expected {
+				t.Errorf("FAIL: expected %d output %d", test.expected, output)
+			}
+
 		})
 	}
 

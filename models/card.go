@@ -30,3 +30,15 @@ func (c *Card) String() []string {
 	}
 
 }
+
+func (c *Card) GetValue() uint8 {
+	return c.value
+}
+
+func (c *Card) GetRank() string {
+	return c.rank
+}
+
+func (c *Card) GetSuit() string {
+	return c.suit
+}
