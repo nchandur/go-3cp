@@ -8,7 +8,7 @@ import (
 	"github.com/nchandur/go-3cp/player"
 )
 
-var anteBonusPayouts map[int]uint64 = map[int]uint64{
+var anteBonusPayouts map[int]int = map[int]int{
 	0: 0, // high card
 	1: 0, // one pair
 	2: 0, // flush
@@ -18,7 +18,7 @@ var anteBonusPayouts map[int]uint64 = map[int]uint64{
 	6: 6, // royal flush
 }
 
-var bonusPayouts map[int]uint64 = map[int]uint64{
+var bonusPayouts map[int]int = map[int]int{
 	0: 0,
 	1: 1,
 	2: 4,
@@ -38,11 +38,9 @@ func NewGame() *Game {
 	game := Game{
 		Deck: models.NewDeck(),
 	}
-	p := player.NewPlayer(game.Deck)
-	d := dealer.NewDealer(game.Deck)
 
-	game.Player = p
-	game.Dealer = d
+	game.Player = player.NewPlayer(game.Deck)
+	game.Dealer = dealer.NewDealer(game.Deck)
 
 	return &game
 }
@@ -50,8 +48,8 @@ func NewGame() *Game {
 func (g *Game) Play() error {
 
 	for {
-		var ante uint64
-		var bonus uint64
+		var ante int
+		var bonus int
 
 		fmt.Printf("Place ante: ")
 		_, err := fmt.Scanln(&ante)
@@ -77,30 +75,33 @@ func (g *Game) Play() error {
 			break
 		}
 
-		err = g.Dealer.Play()
-
-		if err != nil {
-			return fmt.Errorf("failed to play game: %v", err)
+		if playOut != "continue" {
+			if err := g.Dealer.Play(); err != nil {
+				return fmt.Errorf("failed to play game: %v", err)
+			}
 		}
+
+		// LOGIC FOR PAYOUT WHEN PLAYER FOLDS HAS NOT BEEN IMPLEMENTED!!!!!
+		g.Payouts(ante, bonus)
 
 		g.Player.Hand = models.NewHand(g.Deck)
 		g.Dealer.Hand = models.NewHand(g.Deck)
 
 		g.Deck = models.NewDeck()
 
-		g.Payouts(ante, bonus)
-		fmt.Println(g.Player.Payout)
+		fmt.Println(g.Player.Payout.String())
 	}
 
 	return nil
 }
 
-func (g *Game) Payouts(ante, bonus uint64) {
+func (g *Game) Payouts(ante, bonus int) {
 
 	var playPay = func() {
 
 		// check for dealer qualification
 		if g.Dealer.Hand.Cards[2].GetValue() < 12 && g.Dealer.Hand.Detect() == 0 {
+			fmt.Println("PUSH: Dealer Disqualified")
 			g.Player.Payout.Ante += ante
 			return
 		}
@@ -111,19 +112,28 @@ func (g *Game) Payouts(ante, bonus uint64) {
 
 		// victory
 		case 1:
+			fmt.Println("VICTORY")
 			g.Player.Payout.Ante += (ante + (ante * anteBonusPayouts[g.Player.Detect()]))
 			g.Player.Payout.Play += ante
 
 		// loss
 		case -1:
+			fmt.Println("LOSS")
 			g.Player.Payout.Ante -= ante
 			g.Player.Payout.Play -= ante
+		case 0:
+			fmt.Println("PUSH")
 		}
 
 	}
 
 	var bonusPay = func() {
-		g.Player.Payout.Bonus += (bonus + (bonus * bonusPayouts[g.Player.Detect()]))
+		if g.Player.Hand.Detect() > 0 {
+			g.Player.Payout.Bonus += (bonus + (bonus * bonusPayouts[g.Player.Detect()]))
+		} else {
+			g.Player.Payout.Bonus -= bonus
+		}
+
 	}
 
 	// calculates payouts for ante and play wagers

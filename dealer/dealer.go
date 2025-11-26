@@ -2,6 +2,7 @@ package dealer
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/nchandur/go-3cp/models"
 )
@@ -19,6 +20,6 @@ func NewDealer(deck *models.Deck) *Dealer {
 }
 
 func (d *Dealer) Play() error {
-	fmt.Printf("Dealer Hand: %s\n%s\n", models.HandMap[d.Detect()], d.String())
+	fmt.Printf("Dealer Hand: %s\n%s\n", strings.ToTitle(models.HandMap[d.Detect()]), d.String())
 	return nil
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -22,7 +21,5 @@ func main() {
 	game := game.NewGame()
 
 	game.Play()
-
-	fmt.Println(game.Player.Payout)
 
 }
