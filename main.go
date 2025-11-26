@@ -3,35 +3,26 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
-	"github.com/nchandur/go-3cp/dealer"
-	"github.com/nchandur/go-3cp/models"
-	"github.com/nchandur/go-3cp/player"
+	"github.com/nchandur/go-3cp/game"
 )
 
 func main() {
 
-	deck := models.NewDeck()
-	player := player.NewPlayer(deck)
-
-	playerOutput, err := player.Play()
+	f, err := os.OpenFile("files/dev.logs", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error opening file: %v", err)
 	}
+	defer f.Close()
 
-	if playerOutput == "quit" {
-		return
-	}
+	log.SetOutput(f)
 
-	dealer := dealer.NewDealer(deck)
+	game := game.NewGame()
 
-	dealerOutput, err := dealer.Play()
+	game.Play()
 
-	if dealerOutput == "disqualified" {
-		fmt.Println("dealer disqualified")
-	}
-
-	fmt.Println(player.Hand.Compare(dealer.Hand))
+	fmt.Println(game.Player.Payout)
 
 }

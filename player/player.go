@@ -10,46 +10,25 @@ import (
 type Player struct {
 	*models.Hand
 	*models.Stats
-	*models.Wager
+	*models.Payout
 	Kaasu int
 }
 
 func NewPlayer(deck *models.Deck) *Player {
 	hand := models.NewHand(deck)
 	stats := models.NewStats()
-	return &Player{Hand: hand, Stats: stats}
-}
-
-func (p *Player) SetWagers(ante uint64, bonus uint64) {
-	p.Wager = models.NewWager(ante, bonus)
+	payout := models.Payout{}
+	return &Player{Hand: hand, Stats: stats, Payout: &payout}
 }
 
 func (p *Player) Play() (string, error) {
-	var ante uint64
-	var bonus uint64
 
-	fmt.Printf("Place ante: ")
-	_, err := fmt.Scanln(&ante)
-
-	if err != nil {
-		return "", fmt.Errorf("failed to play: %v", err)
-	}
-
-	fmt.Printf("Place bonus: ")
-	_, err = fmt.Scanln(&bonus)
-
-	if err != nil {
-		return "", fmt.Errorf("failed to play: %v", err)
-	}
-
-	p.SetWagers(ante, bonus)
-
-	fmt.Printf("\n\nPlayer hand: \n%s\n%s\n", p.Hand.String(), models.HandMap[p.Detect()])
+	fmt.Printf("\n\nPlayer hand: %s\n%s\n", models.HandMap[p.Detect()], p.Hand.String())
 
 	var play string
 	fmt.Printf("Continue playing? (y/n): ")
 
-	_, err = fmt.Scanln(&play)
+	_, err := fmt.Scanln(&play)
 
 	if err != nil {
 		return "", fmt.Errorf("failed to play: %v", err)
@@ -57,10 +36,13 @@ func (p *Player) Play() (string, error) {
 
 	play = strings.ToLower(play)
 
-	if play[0] != 'n' {
-		p.Wager.Play = p.Wager.Ante
+	if play[0] == 'y' {
 		return "", nil
 	}
 
-	return "quit", nil
+	if play[0] == 'n' {
+		return "quit", nil
+	}
+
+	return "", fmt.Errorf("invalid input: must be y/n")
 }

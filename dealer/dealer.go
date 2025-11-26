@@ -18,13 +18,7 @@ func NewDealer(deck *models.Deck) *Dealer {
 	return &Dealer{Hand: hand, Stats: stats}
 }
 
-func (d *Dealer) Play() (string, error) {
-	fmt.Printf("Dealer Hand: \n%s\n%s\n", d.String(), models.HandMap[d.Detect()])
-
-	// disqualified
-	if d.Detect() == 0 && d.Hand.Cards[2].GetValue() < 11 {
-		return "disqualified", nil
-	}
-
-	return "", nil
+func (d *Dealer) Play() error {
+	fmt.Printf("Dealer Hand: %s\n%s\n", models.HandMap[d.Detect()], d.String())
+	return nil
 }
